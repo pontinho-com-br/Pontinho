@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pontinho.Domain\Pontinho.Domain.csproj" />
+    <ProjectReference Include="..\Pontinho.Dto\Pontinho.Dto.csproj" />
+    <ProjectReference Include="..\Pontinho.Logic.Interfaces\Pontinho.Logic.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>
