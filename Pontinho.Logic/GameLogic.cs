@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using Pontinho.Data;
 using Pontinho.Domain;
@@ -53,14 +52,20 @@ namespace Pontinho.Logic
                 round = match.Rounds.FirstOrDefault(r => r.Id == model.Id);
             else
             {
-
                 round = new Round { Match = match, Carding = _dbContext.Players.Find(model.Players.FirstOrDefault()?.PlayerId ?? 0) };
                 match.Rounds.Add(round);
             }
             BindRound(model, round);
             SetWinner(match);
-            _dbContext.Matches.AddOrUpdate(match);
-            _dbContext.Rounds.AddOrUpdate(round);
+
+            if (model.MatchId > 0)
+                _dbContext.Matches.Update(match);
+            else
+                _dbContext.Matches.Add(match);
+            if (round.Id > 0)
+                _dbContext.Rounds.Update(round);
+            else
+                _dbContext.Rounds.Add(round);
 
             _dbContext.SaveChanges();
             return ProjectMatchDetailed(match);

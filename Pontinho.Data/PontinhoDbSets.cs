@@ -1,5 +1,5 @@
-﻿using System.Data.Entity;
-using Pontinho.Domain;
+﻿using Pontinho.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Pontinho.Data
 {

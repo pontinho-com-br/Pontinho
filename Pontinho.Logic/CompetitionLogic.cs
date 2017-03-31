@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Core;
-using System.Data.Entity.Migrations;
 using System.Linq;
 using Pontinho.Data;
 using Pontinho.Domain;
 using Pontinho.Dto;
 using Pontinho.Logic.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Pontinho.Logic
 {
@@ -47,7 +45,10 @@ namespace Pontinho.Logic
         {
             var entity = model.Id > 0 ? GetEntity(user, model.Id) : new Competition();
             Bind(model, entity);
-            _dbContext.Competitions.AddOrUpdate(entity);
+            if (model.Id > 0)
+                _dbContext.Competitions.Update(entity);
+            else
+                _dbContext.Competitions.Add(entity);
             _dbContext.SaveChanges();
             return Project(entity);
         }

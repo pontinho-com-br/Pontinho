@@ -1,10 +1,10 @@
 using System;
-using System.Data.Entity;
 using System.Linq;
 using Pontinho.Data;
 using Pontinho.Domain;
 using Pontinho.Dto;
 using Pontinho.Logic.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Pontinho.Logic
 {

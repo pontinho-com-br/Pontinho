@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Pontinho.Data\Pontinho.Data.csproj" />
     <ProjectReference Include="..\Pontinho.Domain\Pontinho.Domain.csproj" />
     <ProjectReference Include="..\Pontinho.Dto\Pontinho.Dto.csproj" />
     <ProjectReference Include="..\Pontinho.Logic.Interfaces\Pontinho.Logic.Interfaces.csproj" />

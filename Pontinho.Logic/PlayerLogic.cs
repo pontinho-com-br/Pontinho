@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Linq.Expressions;
 using Pontinho.Data;
 using Pontinho.Domain;
 using Pontinho.Dto;
@@ -74,7 +72,10 @@ namespace Pontinho.Logic
             var entity = model.Id == 0 ? new Player() : _dbContext.Players.FirstOrDefault(p => p.CreatedBy == user.UserName && p.Id == model.Id);
             if (entity == null) throw new UnauthorizedAccessException("Player does NOT exist or you do NOT have permission to access it");
             BindToEntity(model, entity);
-            _dbContext.Players.AddOrUpdate(entity);
+            if (model.Id > 0)
+                _dbContext.Players.Update(entity);
+            else
+                _dbContext.Players.Update(entity);
             _dbContext.SaveChanges();
             return Project(entity);
         }

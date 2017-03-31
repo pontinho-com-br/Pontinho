@@ -10,8 +10,15 @@ namespace Pontinho.Domain.Services
 
     public class CurrentUserService
     {
-        //public HttpContext Context => HttpContext.Current.GetOwinContext();
-        
-        //public ClaimsPrincipal CurrentPrincipal => Context.Authentication.User;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public CurrentUserService(IHttpContextAccessor httpContextAccessor)
+        {
+            _httpContextAccessor = httpContextAccessor;
+        }
+
+        public HttpContext Context => _httpContextAccessor.HttpContext;
+
+        public ClaimsPrincipal CurrentPrincipal => Context.User;
     }
 }
