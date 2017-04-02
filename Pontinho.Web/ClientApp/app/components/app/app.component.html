@@ -8,4 +8,55 @@
     </div>
 </div>-->
 
-<router-outlet></router-outlet>
+
+
+<header id="header">
+    <h1 class="logo">
+        <!--@*<a href="#" title="#" class="js-nav-toggler">
+            <i class="icon icon-close"></i>
+        </a>*@-->
+        <a routerLink="/">Pon<span>tinho</span></a>
+    </h1>
+    <div class="pageContent">
+        <div class="container">
+            <ul class="topNavigation">
+                <li>
+                    <div class="btn-group simpleList list-sm">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="zmdi zmdi-settings zmdi-hc-fw icon"></i>
+                        <!--<span class="badge">98</span>-->
+                    </button>
+                        <ul class="dropdown-menu pull-right">
+                            <li>
+                                <a class="clearfix" routerLink="/user/profile">
+                                    <span class="pull-left"><i class="fa fa-user" aria-hidden="true"></i> My Profile</span>
+                                    <!--<span class="pull-right info">109,073</span>-->
+                                </a>
+                            </li>
+                            <li>
+                                <a class="clearfix" routerLink="/player/list">
+                                    <span class="pull-left"><i class="fa fa-users" aria-hidden="true"></i> Players</span>
+                                    <!--<span class="pull-right info">109,073</span>-->
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Home/Logout" title="#" class="clearfix">
+                                    <span class="pull-left"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="pageWrap">
+    <!-- Page content -->
+    <div class="pageContent">
+        <div class="">
+            <!--container-->
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
