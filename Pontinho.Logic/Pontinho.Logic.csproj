@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Pontinho.Data\Pontinho.Data.csproj" />
     <ProjectReference Include="..\Pontinho.Domain\Pontinho.Domain.csproj" />
     <ProjectReference Include="..\Pontinho.Dto\Pontinho.Dto.csproj" />
