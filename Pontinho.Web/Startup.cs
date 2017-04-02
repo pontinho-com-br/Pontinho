@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Pontinho.Data;
 using Pontinho.Domain;
+using Pontinho.Domain.Services;
 
 namespace Pontinho_Web
 {
@@ -38,6 +39,8 @@ namespace Pontinho_Web
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<PontinhoDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddTransient<CurrentUserService>();
 
             // Add framework services.
             services.AddMvc();
