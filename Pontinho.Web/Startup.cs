@@ -1,18 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Pontinho.Data;
 using Pontinho.Domain;
-using Pontinho.Domain.Services;
+using Pontinho.Logic;
+using CurrentUserService = Pontinho.Domain.Services.CurrentUserService;
 
 namespace Pontinho_Web
 {
@@ -27,11 +32,12 @@ namespace Pontinho_Web
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
+        public IContainer ApplicationContainer { get; private set; }
 
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PontinhoDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -41,9 +47,21 @@ namespace Pontinho_Web
                 .AddDefaultTokenProviders();
 
             services.AddTransient<CurrentUserService>();
+            services.AddTransient<Pontinho.Logic.CurrentUserService>();
+
+            var builder = new ContainerBuilder();
+
+            builder.RegisterAssemblyTypes(typeof(PlayerLogic).GetTypeInfo().Assembly).AsImplementedInterfaces();
 
             // Add framework services.
             services.AddMvc();
+
+            builder.Populate(services);
+
+            this.ApplicationContainer = builder.Build();
+
+            // Create the IServiceProvider based on the container.
+            return new AutofacServiceProvider(this.ApplicationContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
