@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pontinho.Domain;
 using Pontinho.Logic;
@@ -6,6 +7,7 @@ using Pontinho.Logic.Interfaces;
 
 namespace Pontinho.Web.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class MessageController : Controller
     {

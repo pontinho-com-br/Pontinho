@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Pontinho_Web
+namespace Pontinho.Web
 {
     public class Program
     {

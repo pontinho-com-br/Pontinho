@@ -1,0 +1,30 @@
+<div class="page-login">
+    <div class="loginContentWrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
+                    <form data-parsley-validate>
+                        <div class="form-group">
+                            <input type="email" class="form-control simple-form-control" placeholder="Email" required data-parsley-error-message="Wrong e-mail format"
+                                [(ngModel)]="model.email" name="email">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control simple-form-control" placeholder="Password" required data-parsley-error-message="Wrong password"
+                                [(ngModel)]="model.password" name="password">
+                            <i class="fa fa-lock"></i>
+                        </div>
+
+                        <div class="form-group">
+                            <a class="btn btn-orange" (click)="login()">Log In</a>
+                        </div>
+                    </form>
+                    <ul class="more">
+                        <li><a routerLink="/register">Register</a></li>
+                        <!--<li><a href="forgot-password.html" title="#">Forgotten password</a></li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

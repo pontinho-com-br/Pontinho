@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { RouteErrors } from './../models/route-errors.model';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class ValidationService {

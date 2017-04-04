@@ -19,7 +19,7 @@ using Pontinho.Domain;
 using Pontinho.Logic;
 using CurrentUserService = Pontinho.Domain.Services.CurrentUserService;
 
-namespace Pontinho_Web
+namespace Pontinho.Web
 {
     public class Startup
     {
@@ -46,8 +46,25 @@ namespace Pontinho_Web
                 .AddEntityFrameworkStores<PontinhoDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+
+                // Cookie settings
+                options.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromDays(150);
+                options.Cookies.ApplicationCookie.LoginPath = "/login";
+                options.Cookies.ApplicationCookie.LogoutPath = "/Account/LogOff";
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
+
             services.AddTransient<CurrentUserService>();
-            services.AddTransient<Pontinho.Logic.CurrentUserService>();
+            services.AddTransient<Logic.CurrentUserService>();
 
             var builder = new ContainerBuilder();
 

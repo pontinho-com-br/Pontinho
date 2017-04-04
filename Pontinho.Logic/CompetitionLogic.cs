@@ -32,7 +32,9 @@ namespace Pontinho.Logic
 
         public IQueryable<Competition> GetEntities(ApplicationUser user)
         {
-            return _dbContext.Competitions.Where(c => c.CreatedBy == user.UserName || c.Players.Any(p => p.UserId == user.Id)).Include(c => c.Matches).Include(c => c.Players);
+            var username = user?.UserName;
+            var id = user?.Id;
+            return _dbContext.Competitions.Where(c => c.CreatedBy == username || c.Players.Any(p => p.UserId == id)).Include(c => c.Matches).Include(c => c.Players);
         }
 
         public CompetitionDto Get(ApplicationUser user, int id)

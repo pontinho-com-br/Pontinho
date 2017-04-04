@@ -1,0 +1,34 @@
+<div class="page-login">
+    <div class="loginContentWrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-lg-4 col-lg-offset-4">
+                    <div class="text-center">
+                        <h1 class="pageTitle">Sign up</h1>
+                    </div>
+                    <form data-parsley-validate>
+                        <div class="form-group">
+                            <input type="email" class="form-control simple-form-control" placeholder="Email" required data-parsley-error-message="Wrong e-mail format"
+                                [(ngModel)]="model.email" name="email">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <div class="form-group">
+                            <input id="new-password" type="password" class="form-control simple-form-control" placeholder="Create a password" required
+                                data-parsley-error-message="You can't leave this empty" [(ngModel)]="model.password" name="password">
+                            <i class="fa fa-lock"></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control simple-form-control" placeholder="Confirm your password" required data-parsley-error-message="These passwords don't match"
+                                data-parsley-equalto="#new-password" [(ngModel)]="model.password2" name="password2">
+                            <i class="fa fa-lock"></i>
+                        </div>
+
+                        <div class="form-group">
+                            <a type="submit" class="btn btn-orange submit" (click)="register()">Sign up</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
