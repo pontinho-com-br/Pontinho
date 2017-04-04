@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { ValidationService } from './validation.service';
+import { AuthService } from './auth.service';
 import { md5 } from './md5';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -12,14 +13,19 @@ export class UserService {
 
     constructor(
         private _http: Http,
-        private validationService: ValidationService
+        private validationService: ValidationService,
+        private authService: AuthService
     ) { }
 
     currentUser: any;
 
     login(user: any): Observable<any> {
         return this._http.post(`${this.BaseEndPoint}/login`, user)
-            .map((response: Response) => response.json())
+            .catch(e => this.validationService.handleError(e));
+    }
+
+    logoff(): Observable<any> {
+        return this._http.post(`${this.BaseEndPoint}/logoff`, null)
             .catch(e => this.validationService.handleError(e));
     }
 

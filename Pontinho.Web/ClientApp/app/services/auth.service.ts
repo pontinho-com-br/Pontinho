@@ -1,5 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import { Router } from '@angular/router';
 import { Subject } from "rxjs/Subject";
 
 @Injectable()
@@ -11,13 +12,14 @@ export class AuthService {
     private user: any;
     userChange = new BehaviorSubject<string>(null);
 
-    constructor() {
+    constructor(private router: Router) {
         let user = localStorage.getItem(this.userKey);
         this.setCurrentUser(JSON.parse(user));
     }
 
     logout(): void {
         this.setCurrentUser(null);
+        this.router.navigate(['/']);
     }
 
     setCurrentUser(user: any) {

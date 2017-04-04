@@ -27,7 +27,7 @@ import { UserService } from './../../services/user.service';
                                 </a>
                             </li>
                             <li>
-                                <a href="/Home/Logout" title="#" class="clearfix">
+                                <a (click)="logoff()" title="#" class="clearfix">
                                     <span class="pull-left"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</span>
                                 </a>
                             </li>
@@ -52,4 +52,10 @@ export class MenuComponent implements OnInit {
     }
 
     ngOnInit() { }
+
+    logoff(){
+        this.userService.logoff().subscribe(()=>{
+            this.authService.logout();
+        });
+    }
 }

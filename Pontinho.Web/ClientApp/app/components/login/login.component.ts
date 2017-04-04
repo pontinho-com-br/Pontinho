@@ -20,9 +20,14 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.userService.login(this.model).subscribe(result => {
-            this.userService.currentUser = result;
-            this.authService.setCurrentUser(result);
-            this.router.navigate([this.authService.redirectUrl]);
+            this.userService.profile().subscribe(profile => {
+                this.userService.currentUser = profile;
+                this.authService.setCurrentUser(profile);
+                if (!!!this.authService.redirectUrl) {
+                    this.authService.redirectUrl = '/';
+                }
+                this.router.navigate([this.authService.redirectUrl]);
+            });
         });
     }
 }

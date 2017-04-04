@@ -34,7 +34,7 @@ namespace Pontinho.Web.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    return Ok(Profile());
+                    return Ok();
                 }
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
