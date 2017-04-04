@@ -4760,3 +4760,24 @@ app {
     left: 0;
     right: 0;
 }
+
+#header li .profile {
+    margin-left: 10px;
+}
+
+.profile-image img {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.3);
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-background-clip: padding-box;
+}
+
+.simpleList .profile-image {
+    float: left;
+}
+
+    .simpleList .profile-image img {
+        width: 32px;
+        height: 32px;
+    }

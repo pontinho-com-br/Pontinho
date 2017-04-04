@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { ValidationService } from './validation.service';
+import { md5 } from './md5';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
@@ -38,5 +39,14 @@ export class UserService {
         return this._http.post(`${this.BaseEndPoint}/profile`, profile)
             .map((response: Response) => response.json())
             .catch(e => this.validationService.handleError(e));
+    }
+
+    getGravatarImage(): string {
+        return this.getGravatarByEmail(this.currentUser.email);
+    }
+
+    getGravatarByEmail(email: string): string {
+        if (!email) email = "___";
+        return 'http://www.gravatar.com/avatar/' + md5(email) + '?s=210&d=mm';
     }
 }

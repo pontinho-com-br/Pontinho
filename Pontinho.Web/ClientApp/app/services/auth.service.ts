@@ -12,8 +12,8 @@ export class AuthService {
     userChange = new BehaviorSubject<string>(null);
 
     constructor() {
-        let userId = localStorage.getItem(this.userKey);
-        this.setCurrentUser(userId);
+        let user = localStorage.getItem(this.userKey);
+        this.setCurrentUser(JSON.parse(user));
     }
 
     logout(): void {
@@ -26,7 +26,7 @@ export class AuthService {
         if (this.user == null) {
             localStorage.removeItem(this.userKey);
         } else {
-            localStorage.setItem(this.userKey, user);
+            localStorage.setItem(this.userKey, JSON.stringify(user));
         }
         this.userChange.next(this.user);
     }

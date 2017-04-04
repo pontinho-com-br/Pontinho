@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../../services/auth.service';
+import { UserService } from './../../services/user.service';
 
 @Component({
     selector: 'p-menu',
     template: `
-    <div class="pageContent" *ngIf="userId">
+    <div class="pageContent" *ngIf="user">
         <div class="container">
             <ul class="topNavigation">
                 <li>
-                    <div class="btn-group simpleList list-sm">
+                    <div class="btn-group simpleList list-sm profile profile-image">
                         <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="zmdi zmdi-settings zmdi-hc-fw icon"></i>
-                        <!--<span class="badge">98</span>-->
-                    </button>
+                            <img [src]="userService.getGravatarByEmail(user.email)" alt=":)" class="img-responsive">
+                        </button>
                         <ul class="dropdown-menu pull-right">
                             <li>
                                 <a class="clearfix" routerLink="/user/profile">
@@ -41,10 +41,13 @@ import { AuthService } from './../../services/auth.service';
 })
 
 export class MenuComponent implements OnInit {
-    userId: string;
-    constructor(private authService: AuthService) {
-        this.authService.userChange.subscribe(userId => {
-            this.userId = userId;
+    user: string;
+    constructor(
+        private authService: AuthService,
+        private userService: UserService
+        ) {
+        this.authService.userChange.subscribe(user => {
+            this.user = user;
         });
     }
 
